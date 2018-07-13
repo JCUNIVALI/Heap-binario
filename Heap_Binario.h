@@ -145,31 +145,32 @@ bool cimaHeap(Heap<T> &heap, int i) { // o(log n)
 }
 template <typename T>
 void atualizar(Heap<T> &heap, T d, int chave) throw(){
-	try {
-		for (int i = 1; i < heap.qtd; i++) {
-			if (heap.vet[i]->dado == d) {
-				heap.vet[i]->chave = chave;
-				if (heap.tipo = 'm') {
-					if (heap.vet[i]->chave < heap.vet[i / 2]->chave) {
-						cimaHeap(heap, i);
-					}
-					else {
-						baixoHeap(heap, i);
-					}
+	for (int i = 1; i < heap.qtd; i++) {
+		if (heap.vet[i]->dado == d) {
+			heap.vet[i]->chave = chave;
+			if (heap.tipo = 'm') {
+				if (i < 2) {
+					return;
 				}
-				else if (heap.tipo = 'M') {
-					if (heap.vet[i]->chave < heap.vet[i / 2]->chave) {
-						baixoHeap(heap, i);
-					}
-					else {
-						cimaHeap(heap, i);
-					}
+				if (heap.vet[i]->chave < heap.vet[i / 2]->chave) {
+					cimaHeap(heap, i);
+				}
+				else {
+					baixoHeap(heap, i);
+				}
+			}
+			else if (heap.tipo = 'M') {
+				if (i < 2) {
+					return;
+				}
+				if (heap.vet[i]->chave < heap.vet[i / 2]->chave) {
+					baixoHeap(heap, i);
+				}
+				else {
+					cimaHeap(heap, i);
 				}
 			}
 		}
-	}
-	catch (exception& e) {
-		cout << "Erro de execao: " << e.what() << endl;
 	}
 }
 
